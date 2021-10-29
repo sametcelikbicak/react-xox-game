@@ -9,3 +9,7 @@ export interface BoardProps {
   squares: SquareType[];
   onClick(i: number): void;
 }
+
+export interface History {
+  squares: SquareType[];
+}
