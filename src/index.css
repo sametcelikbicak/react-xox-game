@@ -12,7 +12,8 @@ li {
 }
 
 button {
-  height: 30px;
+  min-height: 30px;
+  height: auto;
   width: 150px;
 }
 
@@ -59,7 +60,11 @@ button {
 
 .game-info {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .game-info div {
   font-size: 20px;
+  margin-bottom: 10px;
 }

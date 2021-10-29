@@ -31,7 +31,6 @@ const Game: React.FC = () => {
         }
     ]);
 
-
     const handleClick = (i: number): void => {
         const newHistory = history.slice(0, stepNumber + 1);
         const current = newHistory[newHistory.length - 1];
@@ -57,8 +56,9 @@ const Game: React.FC = () => {
 
     const current = history[stepNumber];
     const winner = calculateWinner(current.squares);
-
+    let isStepLeft = true;
     const moves = history.map((step, move) => {
+        isStepLeft = step.squares.some(square => square === null);
         const desc = move ?
             'Go to move #' + move :
             'Go to game start';
@@ -72,8 +72,10 @@ const Game: React.FC = () => {
     let status;
     if (winner) {
         status = "Winner: " + winner;
-    } else {
+    } else if (isStepLeft) {
         status = "Next player: " + (xIsNext ? "X" : "O");
+    } else {
+        status = "Nobody won :(";
     }
 
     return (
@@ -86,6 +88,9 @@ const Game: React.FC = () => {
             </div>
             <div className="game-info">
                 <div>{status}</div>
+                {(winner || !isStepLeft) && <button onClick={() => {
+                    jumpTo(0);
+                }}>Start new game</button>}
                 <ol>{moves}</ol>
             </div>
         </div>
